@@ -1,8 +1,8 @@
 const BASE_URL = 'http://localhost:3000/api';
 
-const getJobs = async (source = 'all') => {
+const getJobs = async (source = 'all', keyword = '') => {
     try {
-        const response = await fetch(`${BASE_URL}/jobs?source=${source}`);
+        const response = await fetch(`${BASE_URL}/jobs?source=${source}&keyword=${encodeURIComponent(keyword)}`);
 
         if (!response.ok) {
             throw new Error(`Failed to fetch jobs: ${response.status}`);

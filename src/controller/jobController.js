@@ -3,7 +3,7 @@ const { fetchArbeitnowJobs } = require('../service/arbeitnow');
 const { fetchMuseJobs } = require('../service/theMuse');
 
 const getJobs = async (req, res) => {
-    const { source = 'all' } = req.query;
+    const { source = 'all', keyword = '' } = req.query;
 
     try {
         // Initialize empty array as a container for job results.
@@ -26,6 +26,15 @@ const getJobs = async (req, res) => {
             jobs = [...remotive, ...arbeitnow, ...muse];
         } else {
             return res.status(400).json({ error: 'Invalid source parameter' });
+        }
+
+        // Filter by keyword 
+        if (keyword) {
+            jobs = jobs.filter((job) =>
+                job.title.toLowerCase().includes(keyword.toLowerCase()) ||
+                job.company.toLowerCase().includes(keyword.toLowerCase()) ||
+                job.tags.some((tag) => tag.toLowerCase().includes(keyword.toLowerCase()))
+            );
         }
 
         res.json({ source, total: jobs.length, jobs });

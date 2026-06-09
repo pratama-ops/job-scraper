@@ -8,6 +8,7 @@
 // into their respective columns, and updates job counts.
 const handleSearch = async () => {
   const source = document.getElementById('sourceSelect').value;
+  const keyword = document.getElementById('searchInput').value.trim();
 
   const containers = {
     remotive: 'remotiveList',
@@ -18,7 +19,7 @@ const handleSearch = async () => {
   // Show loading state on all columns
   Object.values(containers).forEach((id) => setLoading(id));
 
-  const jobs = await getJobs(source);
+  const jobs = await getJobs(source, keyword);
 
   // Separate jobs by source
   const remotiveJobs = jobs.filter((job) => job.source === 'remotive');
