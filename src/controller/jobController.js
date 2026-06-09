@@ -1,6 +1,6 @@
-const { fetchRemotiveJobs } = require('../services/remotive');
-const { fetchArbeitnowJobs } = require('../services/arbeitnow');
-const { fetchMuseJobs } = require('../services/the-muse');
+const { fetchRemotiveJobs } = require('../service/remotive');
+const { fetchArbeitnowJobs } = require('../service/arbeitnow');
+const { fetchMuseJobs } = require('../service/theMuse');
 
 const getJobs = async (req, res) => {
     const { source = 'all' } = req.query;

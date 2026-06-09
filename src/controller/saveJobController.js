@@ -1,4 +1,4 @@
-const { pool } = require('../db/database');
+const { pool } = require('../db/db');
 
 const getSavedJobs = async (req, res) => {
     try {
