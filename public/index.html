@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevJobs — Remote & Part-time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --border: #2a2d3a;
+        --accent: #6c63ff;
+        --accent-hover: #574fd6;
+        --text: #e2e8f0;
+        --muted: #64748b;
+        --remotive: #10b981;
+        --arbeitnow: #f59e0b;
+        --muse: #6c63ff;
+        --danger: #ef4444;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+      }
+
+      header h1 .accent { color: var(--accent); }
+
+      header .subtitle {
+        color: var(--muted);
+        margin-top: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      /* Search Bar */
+      .search-bar {
+        display: flex;
+        gap: 0.75rem;
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
+      }
+
+      .search-bar input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .search-bar input:focus { border-color: var(--accent); }
+
+      .search-bar select {
+        padding: 0.75rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .search-bar button {
+        padding: 0.75rem 1.5rem;
+        background: var(--accent);
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .search-bar button:hover { background: var(--accent-hover); }
+
+      /* Main Grid */
+      main {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      /* Column */
+      .column-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .source-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+      }
+
+      .source-badge.remotive { background: #10b98120; color: var(--remotive); }
+      .source-badge.arbeitnow { background: #f59e0b20; color: var(--arbeitnow); }
+      .source-badge.muse { background: #6c63ff20; color: var(--muse); }
+
+      .job-count {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* Job Card */
+      .job-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        transition: border-color 0.2s;
+      }
+
+      .job-card:hover { border-color: var(--accent); }
+
+      .job-card .job-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--text);
+      }
+
+      .job-card .job-company {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-bottom: 0.75rem;
+      }
+
+      .job-card .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .job-card .tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        background: #2a2d3a;
+        border-radius: 4px;
+        color: var(--muted);
+      }
+
+      .job-card .job-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+      }
+
+      .job-card .job-type {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        background: #6c63ff20;
+        color: var(--accent);
+      }
+
+      .job-card .job-date {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .job-card .card-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .job-card .btn-apply {
+        flex: 1;
+        padding: 0.5rem;
+        background: var(--accent);
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 0.8rem;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+
+      .job-card .btn-apply:hover { background: var(--accent-hover); }
+
+      .job-card .btn-save {
+        padding: 0.5rem 0.75rem;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .job-card .btn-save:hover { border-color: var(--accent); color: var(--accent); }
+      .job-card .btn-save.saved { border-color: var(--remotive); color: var(--remotive); }
+
+      /* Saved Section */
+      .saved-section {
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+      }
+
+      .saved-section h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .saved-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      /* Empty State */
+      .empty-state {
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+        padding: 2rem;
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+      }
+
+      /* Loading */
+      .loading {
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+        padding: 2rem;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* Scrollable column */
+      .job-list {
+        max-height: 70vh;
+        overflow-y: auto;
+        padding-right: 0.25rem;
+      }
+
+      .job-list::-webkit-scrollbar { width: 4px; }
+      .job-list::-webkit-scrollbar-track { background: transparent; }
+      .job-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Dev<span class="accent">Jobs</span></h1>
+      <p class="subtitle">Remote & Part-time Backend Developer Jobs in the US</p>
+    </header>
+
+    <!-- Search -->
+    <section class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search jobs... (e.g. Node.js, Python)" />
+      <select id="sourceSelect">
+        <option value="all">All Sources</option>
+        <option value="remotive">Remotive</option>
+        <option value="arbeitnow">Arbeitnow</option>
+        <option value="muse">The Muse</option>
+      </select>
+      <button id="searchBtn">Search</button>
+    </section>
+
+    <!-- Results -->
+    <main>
+      <section class="column">
+        <div class="column-header">
+          <span class="source-badge remotive">Remotive</span>
+          <span class="job-count" id="remotiveCount">0 jobs</span>
+        </div>
+        <div class="job-list" id="remotiveList">
+          <p class="empty-state">Hit search to load jobs</p>
+        </div>
+      </section>
+
+      <section class="column">
+        <div class="column-header">
+          <span class="source-badge arbeitnow">Arbeitnow</span>
+          <span class="job-count" id="arbeitnowCount">0 jobs</span>
+        </div>
+        <div class="job-list" id="arbeitnowList">
+          <p class="empty-state">Hit search to load jobs</p>
+        </div>
+      </section>
+
+      <section class="column">
+        <div class="column-header">
+          <span class="source-badge muse">The Muse</span>
+          <span class="job-count" id="museCount">0 jobs</span>
+        </div>
+        <div class="job-list" id="museList">
+          <p class="empty-state">Hit search to load jobs</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Saved Jobs -->
+    <section class="saved-section">
+      <h2>⭐ Saved Jobs <span class="job-count" id="savedCount">0 saved</span></h2>
+      <div class="saved-grid" id="savedList">
+        <p class="empty-state">No saved jobs yet</p>
+      </div>
+    </section>
+
+    <script src="js/storage.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
