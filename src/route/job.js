@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getJobs } = require('../controllers/jobsController');
-const { getSavedJobs, saveJob, deleteJob } = require('../controllers/savedController');
+const { getJobs } = require('../controller/jobController');
+const { getSavedJobs, saveJob, deleteJob } = require('../controller/saveJobController');
 
 router.get('/jobs', getJobs);
 
